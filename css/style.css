@@ -1,0 +1,28 @@
+.theme-color{
+    color: #40a7a2 !important;
+}
+.bg-.theme-color{
+    background-color: #40a7a2 !important;
+}
+.navbar .active {
+    color: #40a7a2 !important;
+}
+
+#navbar-brand {
+    font-weight: 900;
+    font-size: 30px;
+    padding: 5px;
+    color: #40a7a2 !important;
+}
+#category .nav-link {
+    color: #40a7a2 !important;
+}
+#category .active {
+    color: #fff !important;
+    background-color:  #40a7a2 !important;
+}
+
+
+#main {
+    height: 400px;
+}
