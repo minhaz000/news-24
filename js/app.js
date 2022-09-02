@@ -10,7 +10,7 @@ const loadCategory = ()=>{
             const a = document.createElement('a')
             a.innerText = `${item.category_name}`
             a.setAttribute("href","#")
-            a.setAttribute("onclick",`getNewsByCategory(${ JSON.stringify(item.category_id)})`)
+            a.setAttribute("onclick",`getNewsByCategory(${ JSON.stringify(item.category_id)});getActive(this)`)
             a.classList.add('nav-link')
             if(i==0){a.classList.add('active')}
             category.append(a)
@@ -20,22 +20,29 @@ const loadCategory = ()=>{
      })
     .catch(err => console.log(err))
 }
+const getActive = (elemet)=>{
+    const active =  category.querySelector('.active')
+    active.classList.remove('active')
+    elemet.classList.add('active')
+    console.log(elemet)
+}
+const getNewsByCategory =(id="01")=>{
 
-const getNewsByCategory =(category_id='01')=>{
+  
     main.innerHTML = ""
-   const url = `https://openapi.programming-hero.com/api/news/category/${category_id}`
-    
+   const url = `https://openapi.programming-hero.com/api/news/category/${id}`
+    console.log(id,  "this is ")
     fetch(url).then(res=>res.json()).then(res=>{ 
         res.data.map((news)=>{ 
             const div = document.createElement('div')
-            div.classList.add('card','mt-3')
+            div.classList.add('card','mt-3','text-center','text-md-start')
             div.innerHTML = ` <div class="row">
                                 <div class="col-12 col-md-4"> <img class=" img-fluid rounded" src="${news.image_url}" alt=""> </div>
                                     <div class="col-12 col-md-8 card-body pt-0 ">
-                                        <h5 class="card-header">${news.category_id}</h5>
-                                        <h5 class="card-title">Special title treatment</h5>
-                                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                                       
+                                        <h5 class="card-title p-2">${news.title}</h5>
+                                        <p class="card-text"> ${news.details.slice(0,200)+`  ...`}</p>
+                                    <a href="#" class="btn btn-primary mr-auto">Go somewhere</a>
                                     </div>
                                 </div>
                             `
