@@ -26,3 +26,6 @@
 #main {
     min-height: 400px;
 }
+#loder{
+    z-index: 300;
+}

@@ -1,6 +1,6 @@
 const category = document.getElementById('category')
 const main = document.getElementById('main')
-
+const loder =  document.getElementById('loder')
 
 const loadCategory = ()=>{
     const url = `https://openapi.programming-hero.com/api/news/categories`
@@ -27,9 +27,10 @@ const getActive = (elemet)=>{
     console.log(elemet)
 }
 const getNewsByCategory =(id="01")=>{
+main.innerHTML = ""
+loder.classList.remove('d-none')
 
-  
-    main.innerHTML = ""
+
    const url = `https://openapi.programming-hero.com/api/news/category/${id}`
     console.log(id,  "this is ")
     fetch(url).then(res=>res.json()).then(res=>{ 
@@ -52,7 +53,8 @@ const getNewsByCategory =(id="01")=>{
         if(res.data.length == 0 ) { 
             main.innerHTML= ` <h4 class="text-danger text-center"> No News Found  </h4>`
         }
-        return console.log(res) } )
+    loder.classList.add('d-none')   
+    } )
     
 }
 
