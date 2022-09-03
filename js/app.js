@@ -1,6 +1,7 @@
 const category = document.getElementById('category')
 const main = document.getElementById('main')
 const loder =  document.getElementById('loder')
+const newsCount = document.getElementById('newsCount')
 
 const loadCategory = ()=>{
     const url = `https://openapi.programming-hero.com/api/news/categories`
@@ -28,11 +29,12 @@ const getActive = (elemet)=>{
 }
 const getNewsByCategory =(id="01")=>{
 main.innerHTML = ""
+newsCount.value = ""
 loder.classList.remove('d-none')
 
 
    const url = `https://openapi.programming-hero.com/api/news/category/${id}`
-    console.log(id,  "this is ")
+    
     fetch(url).then(res=>res.json()).then(res=>{ 
         res.data.map((news)=>{ 
          
@@ -59,8 +61,11 @@ loder.classList.remove('d-none')
                                 </div>
                             `
             
+                            res.data.length == 0 ? newsCount.value = "No news found in this  category" : newsCount.value = "Total [ " + res.data.length +" ] news found in this  category" 
+
+
             main.append(div)
-            return console.log(news)})
+            })
         if(res.data.length == 0 ) { 
             main.innerHTML= ` <h4 class="text-danger text-center"> No News Found  </h4>`
         }
