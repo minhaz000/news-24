@@ -43,7 +43,7 @@ loder.classList.remove('d-none')
                                        
                                         <h5 class="card-title p-2">${news.title}</h5>
                                         <p class="card-text"> ${news.details.slice(0,200)+`  ...`}</p>
-                                    <a href="#" class="btn btn-primary mr-auto">Go somewhere</a>
+                                    <a href="#" class="btn btn-primary mr-auto" data-bs-toggle="modal" data-bs-target="#detailsModal">Go somewhere</a>
                                     </div>
                                 </div>
                             `
