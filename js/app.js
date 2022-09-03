@@ -77,9 +77,12 @@ const getDetailsNews = (id)=>{
         const modelFooter = document.getElementById('modal-footer')
         modalTitle.innerText = res.data[0].title
         modalBody.innerHTML = ` 
-                                <div class=" text-center  text-break"> ${res.data[0].details} </div>
+                                <div class=" text-center  text-break"> <img class=" img-fluid "  src="${res.data[0].image_url}">  </div>
+                                <div class=" text-center  text-break mt-5 text-justify"> ${res.data[0].details} </div>
                               `
-       modelFooter.innerHTML= ` <div class="ms-auto" > 
+       modelFooter.innerHTML= ` <div class="ml-auto" > 
+       <span class=" px-3"> Todays Pick :${res.data[0].others_info.is_todays_pick ==true?" YES" : "NO"} </span>
+       <span class=" px-3"> Trending :${res.data[0].others_info.is_trending==true ? "YES" :"NO"} </span>
        <span class=" px-3"> ${res.data[0].author.name} </span>
        <img class=" img-fluid rounded-circle" src="${res.data[0].author.img} height="30px" width="30px"/> 
         </div>
@@ -87,7 +90,7 @@ const getDetailsNews = (id)=>{
         
 
     
-    return console.log(res.data[0].author.img)
+    return console.log(res.data[0])
     })
 .catch(err=> console.log(err))
 }

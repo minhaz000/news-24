@@ -29,6 +29,10 @@
 #loder{
     z-index: 300;
 }
-#modal-body{
-    /* min-height: 400px; */
+.text-justify{
+    text-align: justify !important;
+}
+#BlogMain{
+    min-height: 450px;
+    margin-top: 100px !important;
 }
