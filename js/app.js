@@ -35,6 +35,7 @@ loder.classList.remove('d-none')
     console.log(id,  "this is ")
     fetch(url).then(res=>res.json()).then(res=>{ 
         res.data.map((news)=>{ 
+         
             const div = document.createElement('div')
             div.classList.add('card','mt-3','text-center','text-md-start')
             div.innerHTML = ` <div class="row">
@@ -43,7 +44,17 @@ loder.classList.remove('d-none')
                                        
                                         <h5 class="card-title p-2">${news.title}</h5>
                                         <p class="card-text"> ${news.details.slice(0,200)+`  ...`}</p>
-                                    <a href="#" class="btn btn-primary mr-auto" data-bs-toggle="modal" data-bs-target="#detailsModal">Go somewhere</a>
+
+                                        <div class=" mt-5" > 
+                                        <img class=" img-fluid rounded-circle" src="${news.author.img} height="30px" width="30px"/>
+                                        <span class=" px-2"> ${news.author.name ?news.author.name:" No Name found"} </span>
+                                        <i class="fa-solid fa-eye   ms-5 "></i>
+                                        <span class=" "> ${news.total_view ?news.total_view +"M":" No view found"} </span>
+                                        <i class="fa-solid fa-star ms-5"></i>
+                                        <span class=" d-none d-md-inline-block"> ${news.rating ?news.rating.number+" " +news.rating.badge :" No rating found"} </span>
+                                        
+                                    <a onclick='getDetailsNews(${JSON.stringify(news._id)})' class="btn btn-primary float-end mx-3 " data-bs-toggle="modal" data-bs-target="#detailsModal">Veiw Detalis</a>
+                                    </div>
                                     </div>
                                 </div>
                             `
@@ -56,6 +67,29 @@ loder.classList.remove('d-none')
     loder.classList.add('d-none')   
     } )
     
+}
+
+const getDetailsNews = (id)=>{
+    const url = ` https://openapi.programming-hero.com/api/news/${id}`
+    fetch(url).then(res=>res.json()).then((res)=>{
+        const modalTitle = document.getElementById('ModalLabel')
+        const modalBody = document.getElementById('modal-body')
+        const modelFooter = document.getElementById('modal-footer')
+        modalTitle.innerText = res.data[0].title
+        modalBody.innerHTML = ` 
+                                <div class=" text-center  text-break"> ${res.data[0].details} </div>
+                              `
+       modelFooter.innerHTML= ` <div class="ms-auto" > 
+       <span class=" px-3"> ${res.data[0].author.name} </span>
+       <img class=" img-fluid rounded-circle" src="${res.data[0].author.img} height="30px" width="30px"/> 
+        </div>
+       `
+        
+
+    
+    return console.log(res.data[0].author.img)
+    })
+.catch(err=> console.log(err))
 }
 
 loadCategory()
